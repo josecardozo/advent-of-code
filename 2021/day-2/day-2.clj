@@ -16,7 +16,7 @@
   []
   (let [ input (clojure.string/split-lines (slurp "input.txt"))
         commands (map (fn [command] (hash-map :command (nth command 0) :units (nth command 1))) (mapv (fn [raw-command] (clojure.string/split raw-command #" ")) input))]
-    (apply (fn [res] (println "res: " res)(* (:h-pos res) (:depth res))) (vector (reduce (fn [{:keys [depth h-pos aim]} command]                                                                                
+    (apply (fn [res] (* (:h-pos res) (:depth res))) (vector (reduce (fn [{:keys [depth h-pos aim]} command]                                                                                
                                                                                              (case (:command command)
                                                                                                "up" {:aim (- aim (Integer/parseInt (:units command))) :h-pos h-pos :depth depth}
                                                                                                "down" {:aim (+ aim (Integer/parseInt (:units command))) :h-pos h-pos :depth depth}
